@@ -1,4 +1,4 @@
-# duckdb_analytics
+# dbt_mff_analytics
 
 dbt project for Maven Fuzzy Factory analytics using a medallion layout:
 - `bronze`: raw source-aligned views
