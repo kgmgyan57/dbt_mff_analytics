@@ -193,7 +193,7 @@ export MFF_DATA_LAKE_ROOT=/absolute/path/to/
 ## Project Tree Layout
 
 ```text
-quacker-data-lakehouse/
+dbt_mff_analytics/
   README.md
   requirements.txt
   load_maven_bronze.sql
