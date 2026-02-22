@@ -5,7 +5,6 @@
 It is designed for:
 - Analytics engineers building trusted semantic layers
 - Data engineers implementing lightweight local lakehouse workflows
-- Portfolio reviewers evaluating modeling depth, data quality, and architecture decisions
 
 ## Dataset Context
 
