@@ -1,0 +1,106 @@
+version: 2
+
+models:
+  - name: mart_product_daily_sales
+    description: "Daily product performance mart combining product page traffic, conversion, sales, returns, and customer metrics."
+    columns:
+      - name: metric_date
+        description: "Calendar date for the metric."
+        tests:
+          - not_null
+      - name: product_id
+        description: "Product identifier."
+        tests:
+          - not_null
+      - name: product_name
+        description: "Product name from dim_products."
+      - name: product_pageviews_count
+        description: "Count of product detail pageviews."
+      - name: product_sessions_count
+        description: "Distinct sessions that viewed the product page."
+      - name: product_session_conversion_rate
+        description: "Converted sessions divided by product-view sessions."
+      - name: order_items_sold_count
+        description: "Order-item units sold."
+      - name: returned_items_count
+        description: "Count of sold items that had a return event."
+      - name: net_revenue_usd
+        description: "Net revenue after refunds."
+      - name: net_profit_usd
+        description: "Net profit after refunds and COGS."
+      - name: repeat_buyers_count
+        description: "Distinct buyers with more than one order for the product on the same day."
+
+  - name: mart_channel_daily_sessions
+    description: "Daily channel and device performance mart at session aggregation level."
+    columns:
+      - name: session_date
+        description: "Calendar date for the session."
+        tests:
+          - not_null
+      - name: sessions_count
+        description: "Total sessions for channel-device slice."
+      - name: product_pageviews_count
+        description: "Total product detail pageviews across sessions in the slice."
+      - name: product_view_sessions_count
+        description: "Sessions in the slice with at least one product detail pageview."
+      - name: orders_count
+        description: "Total orders attributed to sessions in the slice."
+      - name: session_conversion_rate
+        description: "Share of sessions with at least one order."
+      - name: bounce_rate
+        description: "Share of sessions that bounced."
+      - name: product_view_session_rate
+        description: "Share of sessions with at least one product detail pageview."
+      - name: orders_per_product_view_session
+        description: "Orders divided by sessions that viewed at least one product detail page."
+
+  - name: mart_product_daily_returns
+    description: "Daily product-level returns and refund analysis with price and inferred discount signals."
+    columns:
+      - name: order_date
+        description: "Calendar date for the metric."
+        tests:
+          - not_null
+      - name: product_id
+        description: "Product identifier."
+        tests:
+          - not_null
+      - name: avg_selling_price_usd
+        description: "Average realized selling price per item."
+      - name: list_price_usd
+        description: "Reference list price inferred as max observed item price."
+      - name: inferred_discount_pct
+        description: "Inferred discount percent versus list price."
+      - name: item_return_rate
+        description: "Returned items divided by items sold."
+      - name: item_refund_rate
+        description: "Refunded items divided by items sold."
+      - name: refund_capture_rate
+        description: "Refund dollars as a share of returned gross revenue."
+
+  - name: mart_customer_daily_value
+    description: "Customer-centric daily mart for engagement, purchasing, value, and returns."
+    columns:
+      - name: metric_date
+        description: "Calendar date for the metric."
+        tests:
+          - not_null
+      - name: active_users_count
+        description: "Distinct users with at least one session."
+      - name: product_pageviews_count
+        description: "Total product detail pageviews across all sessions on the day."
+      - name: product_view_sessions_count
+        description: "Distinct sessions with at least one product detail pageview."
+      - name: users_with_product_views_count
+        description: "Distinct users who viewed at least one product detail page."
+      - name: product_view_user_penetration_rate
+        description: "Share of active users who viewed a product detail page."
+      - name: purchasing_users_count
+        description: "Distinct users with at least one purchase."
+      - name: users_with_returns_count
+        description: "Distinct purchasing users with at least one returned item."
+      - name: net_revenue_usd
+        description: "Net daily revenue after refunds."
+      - name: net_revenue_per_purchasing_user
+        description: "Average net revenue per purchasing user."

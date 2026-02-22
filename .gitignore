@@ -1,0 +1,10 @@
+target/
+logs/
+dbt_packages/
+*.duckdb
+*.db
+*.wal
+*.parquet
+*.csv
+.DS_Store
+

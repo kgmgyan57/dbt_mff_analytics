@@ -1,0 +1,20 @@
+version: 2
+
+models:
+  - name: base_orders
+    description: "Bronze view on raw orders table"
+
+  - name: base_order_items
+    description: "Bronze view on raw order_items table"
+
+  - name: base_order_item_refunds
+    description: "Bronze view on raw order_item_refunds table"
+
+  - name: base_website_sessions
+    description: "Bronze view on raw website_sessions table"
+
+  - name: base_website_pageviews
+    description: "Bronze view on raw website_pageviews table"
+
+  - name: base_products
+    description: "Bronze view on raw products table"

@@ -1,0 +1,29 @@
+version: 2
+
+sources:
+  - name: raw
+    meta:
+      external_location: "/Users/gyankumar/Downloads/maven_fuzzy_factory/data_lake/{name}/*/*/*.parquet"
+    tables:
+      - name: orders
+        config:
+          hive_partitioning: true
+      - name: order_items
+        config:
+          hive_partitioning: true
+      - name: order_item_refunds
+        config:
+          hive_partitioning: true
+      - name: website_sessions
+        config:
+          hive_partitioning: true
+      - name: website_pageviews
+        config:
+          hive_partitioning: true
+      - name: products
+        # Products is a dimension, likely not partitioned
+        meta:
+          external_location: "/Users/gyankumar/Downloads/maven_fuzzy_factory/products.csv"
+      - name: mff_data_dictionary
+        meta:
+          external_location: "/Users/gyankumar/Downloads/maven_fuzzy_factory/maven_fuzzy_factory_data_dictionary.csv"

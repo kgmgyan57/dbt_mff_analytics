@@ -1,0 +1,27 @@
+# dbt
+target/
+logs/
+dbt_packages/
+
+# DuckDB
+*.duckdb
+*.db
+*.wal
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+.env
+
+# OS
+.DS_Store
+
+# Data
+*.parquet
+*.csv
+
+target/
+dbt_packages/
+logs/
+dbt_internal_packages/

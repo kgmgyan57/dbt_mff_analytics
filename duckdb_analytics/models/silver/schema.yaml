@@ -1,0 +1,89 @@
+version: 2
+
+models:
+  - name: dim_products
+    description: "Conformed product dimension. Grain: one row per product_id."
+    columns:
+      - name: product_id
+        description: "Primary key for product."
+        tests:
+          - not_null
+          - unique
+      - name: product_name
+        description: "Product display name."
+        tests:
+          - not_null
+      - name: created_at_utc
+        description: "Product creation timestamp in UTC."
+
+  - name: fct_sales
+    description: "Sales fact at order-item grain with returns/refunds and profitability metrics."
+    columns:
+      - name: order_item_id
+        description: "Primary key for the fact grain (one row per order item)."
+        tests:
+          - not_null
+          - unique
+      - name: order_id
+        description: "Order identifier for the parent order."
+        tests:
+          - not_null
+      - name: product_id
+        description: "Foreign key to dim_products."
+        tests:
+          - not_null
+      - name: website_session_id
+        description: "Foreign key to session that generated the order."
+      - name: gross_revenue_usd
+        description: "Gross line-item revenue before refunds."
+      - name: refund_amount_usd
+        description: "Refund amount applied at order-item level."
+      - name: net_revenue_usd
+        description: "Line-item net revenue after refunds."
+      - name: net_profit_usd
+        description: "Line-item net profit after refunds and COGS."
+      - name: has_returned
+        description: "True when a return/refund event exists (even if refund amount is 0)."
+        tests:
+          - not_null
+      - name: has_refund
+        description: "True when refund_amount_usd is greater than 0."
+        tests:
+          - not_null
+
+  - name: fct_sessions
+    description: "Session fact at website_session_id grain with channel, device, behavior, and conversion counts."
+    columns:
+      - name: website_session_id
+        description: "Primary key for session grain."
+        tests:
+          - not_null
+          - unique
+      - name: session_created_at_utc
+        description: "Session creation timestamp in UTC."
+        tests:
+          - not_null
+      - name: user_id
+        description: "User identifier associated with the session."
+        tests:
+          - not_null
+      - name: pageviews_count
+        description: "Number of pageviews in the session."
+      - name: product_pageviews_count
+        description: "Number of product-detail pageviews in the session."
+      - name: viewed_products_count
+        description: "Distinct number of products viewed in the session."
+      - name: has_product_pageview
+        description: "True when session includes at least one product-detail pageview."
+        tests:
+          - not_null
+      - name: is_bounced
+        description: "True when the session has exactly one pageview."
+        tests:
+          - not_null
+      - name: orders_count
+        description: "Distinct number of orders attributed to the session."
+      - name: has_order
+        description: "True when orders_count is greater than 0."
+        tests:
+          - not_null
