@@ -3,7 +3,7 @@ version: 2
 sources:
   - name: raw
     meta:
-      external_location: "/Users/gyankumar/Downloads/maven_fuzzy_factory/data_lake/{name}/*/*/*.parquet"
+      external_location: "{{ env_var('MFF_DATA_LAKE_ROOT') }}/data_lake/{name}/*/*/*.parquet"
     tables:
       - name: orders
         config:
@@ -21,9 +21,8 @@ sources:
         config:
           hive_partitioning: true
       - name: products
-        # Products is a dimension, likely not partitioned
         meta:
-          external_location: "/Users/gyankumar/Downloads/maven_fuzzy_factory/products.csv"
+          external_location: "{{ env_var('MFF_DATA_LAKE_ROOT') }}/products.csv"
       - name: mff_data_dictionary
         meta:
-          external_location: "/Users/gyankumar/Downloads/maven_fuzzy_factory/maven_fuzzy_factory_data_dictionary.csv"
+          external_location: "{{ env_var('MFF_DATA_LAKE_ROOT') }}/mff_data_dictionary.csv"
