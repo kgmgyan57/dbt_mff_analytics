@@ -187,7 +187,7 @@ dbt test
 If needed:
 
 ```bash
-export MFF_DATA_LAKE_ROOT=/absolute/path/to/data_lake
+export MFF_DATA_LAKE_ROOT=/absolute/path/to/
 ```
 
 ## Project Tree Layout
