@@ -45,6 +45,13 @@ dbt run --select gold
 dbt test --select silver
 dbt test --select gold
 ```
+Useful model specific builds:
+
+```bash
+dbt build --select +dim_products
+dbt build --select +fct_sales
+dbt build --select +fct_sessions --exclude +dim_products #exclude dim_products that was built earlier
+```
 
 ## Documentation
 
@@ -59,4 +66,4 @@ dbt docs serve
 - Bronze/silver/gold schemas are configured in `dbt_project.yml` under `models.duckdb_analytics`.
 - Source file locations are currently configured in `models/bronze/_raw_sources.yaml`.
 =======
-# dbt_maven_analytics
+# dbt_mff_analytics
